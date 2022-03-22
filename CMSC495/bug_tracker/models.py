@@ -5,9 +5,15 @@ risk_list = {"High", "Medium", "Low"}
 
 
 class BugTracker(models.Model):
+    # ! todo
+    # Migrate the model
+    # add application to the installed apps
+    # register the model with the admin page
+    # Create a form for the bug tracker
 
     """ 
-    Model class represents the bug tracker object. Detailing what problem what the developer is dealing with in their program
+    Model class represents the bug tracker object. Detailing what problem what 
+    the developer is dealing with in their program
     """
 
     bug_title = models.CharField()
