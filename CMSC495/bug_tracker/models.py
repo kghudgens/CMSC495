@@ -5,8 +5,11 @@ from django.conf import settings
 
 class BugTracker(models.Model):
     # ! todo
-    # register the model with the admin page
     # Create a form for the bug tracker
+    # Create the user application
+    # Create the list view for the home page
+    # Create the templates
+    # Create CRUD views for the Bug Tracker
 
     """ 
     Model class represents the bug tracker object. Detailing what problem what 
