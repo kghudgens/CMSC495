@@ -1,13 +1,10 @@
 from django.db import models
 
 # List of choices the user can select from
-risk_list = {"High", "Medium", "Low"}
 
 
 class BugTracker(models.Model):
     # ! todo
-    # Migrate the model
-    # add application to the installed apps
     # register the model with the admin page
     # Create a form for the bug tracker
 
@@ -16,16 +13,17 @@ class BugTracker(models.Model):
     the developer is dealing with in their program
     """
 
-    bug_title = models.CharField()
+    risk_list = [("High", "High"), ("Medium", "Medium"), ("Low", "Low")]
+
+    bug_title = models.CharField(max_length=200)
     # what project does the bug belong to
-    project_name = models.CharField()
+    project_name = models.CharField(max_length=100)
     # when was the bug first noticed
     date_occured = models.DateField()
     bug_description = models.TextField()
-    # when was the entry recorded by the user
     date = models.DateTimeField()
     # how important is solving this bug
-    bug_risk = models.TextChoices(risk_list)
+    bug_risk = models.CharField(max_length=7, choices=risk_list, default="Low")
 
     def __str__(self):
         """The model will be given the bug's name in the admin panel
