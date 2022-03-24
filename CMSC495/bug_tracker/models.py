@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.conf import settings
 # List of choices the user can select from
 
 
@@ -24,6 +24,9 @@ class BugTracker(models.Model):
     date = models.DateTimeField()
     # how important is solving this bug
     bug_risk = models.CharField(max_length=7, choices=risk_list, default="Low")
+    # Ensure that the bug is associated with the signed in user
+    user = models.ForeignKey(settings.AUTH_USER_MODEL,
+                             on_delete=models.CASCADE)
 
     def __str__(self):
         """The model will be given the bug's name in the admin panel
