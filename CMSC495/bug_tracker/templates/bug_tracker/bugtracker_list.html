@@ -14,6 +14,7 @@
   <li>Date Bug Occured : {{bug.date_occured}}</li>
   <li>Bug Description : {{bug.bug_description|truncatewords:"50"}}</li>
 
+  <a href="{%url 'bug_detail' bug.pk%}"><button>View Bug</button></a>
   {% empty%}
   <p>No bugs to view</p>
   {%endfor%}
