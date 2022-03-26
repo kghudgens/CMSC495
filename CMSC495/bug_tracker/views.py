@@ -1,6 +1,6 @@
 from pyexpat import model
 from django.shortcuts import render
-from django.views.generic import ListView, CreateView, DetailView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.http import HttpResponse
 from bug_tracker.models import BugTracker
 
@@ -25,3 +25,9 @@ class BugDetailView(DetailView):
 
     model = BugTracker
     context_object_name = 'bug'
+
+
+class BugUpdateView(UpdateView):
+    model = BugTracker
+    fields = ["bug_title", 'project_name', 'date_occured',
+              'bug_description', 'bug_risk']
