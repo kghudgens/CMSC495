@@ -37,4 +37,4 @@ class BugTracker(models.Model):
         return self.bug_title
 
     class Meta:
-        ordering = ["-date"]
+        ordering = ["date"]
