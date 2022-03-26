@@ -1,7 +1,9 @@
 from pyexpat import model
 from django.shortcuts import render
+from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView
 from django.http import HttpResponse
+from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
 
@@ -15,8 +17,14 @@ class BugCreateView(CreateView):
     """ View will give user ability to create new Bug Tracker objects. """
 
     model = BugTracker
-    fields = ["bug_title", 'project_name', 'date_occured',
-              'bug_description', 'bug_risk']
+    form_class = BugTrackerForm
+    # on successful submission of form, the view will send the user to the list view index
+    success_url = reverse_lazy('index_list')
+
+    def form_valid(self, form_class):
+        """ Method validates the form and assigns it to the user signed in"""
+        form_class.instance.user = self.request.user
+        return super().form_valid(form_class)
 
 
 class BugDetailView(DetailView):
