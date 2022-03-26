@@ -1,8 +1,8 @@
 from django.urls import path
 
-from . import views
+from bug_tracker.views import IndexListView
 
 urlpatterns = [
     # Home page
-    path('', views.index, name='index'),
+    path('', IndexListView.as_view(), name='index_list'),
 ]
