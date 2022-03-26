@@ -1,5 +1,6 @@
 {%extends 'bug_tracker/base.html'%} {%block content%}
-<button>Create New Bug</button>
+<a href="{%url 'create_bug' %}"><button>Create New Bug</button></a>
+
 <!-- Bug Loop -->
 <ul>
   {% for bug in object_list %}
@@ -11,7 +12,7 @@
   <li>Project Name : {{bug.project_name}}</li>
   <li>Username : {{bug.user}}</li>
   <li>Date Bug Occured : {{bug.date_occured}}</li>
-  <li>Bug Description : {{bug.bug_description}}</li>
+  <li>Bug Description : {{bug.bug_description|truncatewords:"50"}}</li>
 
   {% empty%}
   <p>No bugs to view</p>
