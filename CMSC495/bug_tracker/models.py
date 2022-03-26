@@ -24,7 +24,7 @@ class BugTracker(models.Model):
     # when was the bug first noticed
     date_occured = models.DateField()
     bug_description = models.TextField()
-    date = models.DateField()
+    date = models.DateField(auto_now_add=True)
     # how important is solving this bug
     bug_risk = models.CharField(max_length=7, choices=risk_list, default="Low")
     # Ensure that the bug is associated with the signed in user
