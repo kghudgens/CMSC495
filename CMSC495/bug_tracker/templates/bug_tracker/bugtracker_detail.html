@@ -1,4 +1,7 @@
-{%extends "bug_tracker/base.html"%} {%block content%}
+{%extends "bug_tracker/base.html"%}
+<!--  -->
+{%block content%}
+
 <div>
   <h1>{{bug.bug_title}}</h1>
   <h3>{{bug.bug_risk}}</h3>
@@ -7,5 +10,7 @@
   <l3>Exception Rose : {{bug.date_occured}}</l3>
   <p>{{bug.bug_description}}</p>
 </div>
+
+<a href="{% url 'bug_update' bug.id %}"><button>Update</button></a>
 
 {%endblock%}
