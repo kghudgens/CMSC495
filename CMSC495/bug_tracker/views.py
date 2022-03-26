@@ -1,7 +1,6 @@
-from pyexpat import model
 from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, CreateView, DetailView, UpdateView
+from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.http import HttpResponse
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
@@ -40,3 +39,4 @@ class BugUpdateView(UpdateView):
     model = BugTracker
     fields = ["bug_title", 'project_name', 'date_occured',
               'bug_description', 'bug_risk']
+    template_name_suffix = '_update_form'
