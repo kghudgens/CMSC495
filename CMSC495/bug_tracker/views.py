@@ -40,3 +40,4 @@ class BugUpdateView(UpdateView):
     fields = ["bug_title", 'project_name', 'date_occured',
               'bug_description', 'bug_risk']
     template_name_suffix = '_update_form'
+    success_url = reverse_lazy("index_list")
