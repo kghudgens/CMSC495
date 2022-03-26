@@ -1,0 +1,9 @@
+{%extends "bug_tracker/base.html"%}
+<!--  -->
+{%load crispy_forms_tags %} {%block content%}
+<h1>Update Bug Description</h1>
+<form method="post">
+  {%csrf_token%}{{form|crispy}}
+  <input type="submit" value="Submit" />
+</form>
+{%endblock%}
