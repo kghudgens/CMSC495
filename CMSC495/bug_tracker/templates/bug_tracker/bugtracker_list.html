@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Home Page</title>
+  </head>
+  <body>
+    <button>Create New Bug</button>
+    <ul>
+      {% for bug in object_list %}
+      <h1>Bug</h1>
+      <li>{{bug.date}}</li>
+
+      <li>Bug Title : {{bug.bug_title}}</li>
+      <li>Bug Risk : {{bug.bug_risk}}</li>
+      <li>Project Name : {{bug.project_name}}</li>
+      <li>Username : {{bug.user}}</li>
+      <li>Date Bug Occured : {{bug.date_occured}}</li>
+      <li>Bug Description : {{bug.bug_description}}</li>
+
+      {% empty%}
+      <p>No bugs to view</p>
+      {%endfor%}
+    </ul>
+
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Possimus facilis
+    similique deleniti nobis, esse vitae quod voluptate nulla. Perferendis
+    officiis repellendus ipsa. Non quisquam iure quos! Eum autem id sit.
+  </body>
+</html>
