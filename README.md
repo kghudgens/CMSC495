@@ -9,7 +9,7 @@ Full stack web application made with the Django Framework.
 ## Contributors
 
 - Kevin Hudgens <hudgens1073@gmail.com>
-- Alexander Winter 
+- Alexander Winter  <alwinter36@gmail.com>
 - Bonica Patterson
 
 ---
