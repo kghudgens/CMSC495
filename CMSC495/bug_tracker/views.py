@@ -6,6 +6,10 @@ from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
 
+def about(request):
+    return render(request, 'bug_tracker/about.html')
+
+
 class IndexListView(ListView):
     """ View will display all Bug Tracker objects in a list on the hompage. """
 
