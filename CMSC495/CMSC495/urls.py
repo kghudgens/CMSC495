@@ -19,6 +19,8 @@ from django.urls import path, include
 urlpatterns = [
     # Path is empty because it is the home page
     path("", include('bug_tracker.urls')),
+    path("user/", include('user.urls')),
     path('admin/', admin.site.urls)
+
 
 ]
