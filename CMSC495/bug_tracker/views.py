@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from django.http import HttpResponse, HttpResponseForbidden
+from django.http import HttpResponseForbidden
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
@@ -9,11 +9,12 @@ from .forms import SearchForm
 
 
 def aboutView(request):
-    """ View that will display the about page """
+    """ View that will display the about page. """
     return render(request, 'bug_tracker/about.html')
 
 
 def homeView(request):
+    """ View that displays the home page and the search bar. """
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
@@ -30,13 +31,16 @@ def homeView(request):
 
 
 class IndexListView(ListView):
-    """ View will display all Bug Tracker objects in a list on the hompage. """
+    """ List View will display all Bug Tracker objects in a list. """
 
     model = BugTracker
 
 
 class BugCreateView(CreateView):
-    """ View will give user ability to create new Bug Tracker objects. """
+    """
+    Create View that will allow logged in users the permission to create new 
+    bug objects.
+    """
 
     model = BugTracker
     form_class = BugTrackerForm
@@ -50,14 +54,20 @@ class BugCreateView(CreateView):
 
 
 class BugDetailView(DetailView):
-    """ View will display the Bug Tracker object in its entirety. """
+    """
+    Detail View that displays the selected Bug Tracker object with all 
+    defined attributes. 
+    """
 
     model = BugTracker
     context_object_name = 'bug'
 
 
 class BugUpdateView(UpdateView):
-    """View will display a form so the user can update the bug tracker object. """
+    """
+    Update View that will update the selected object if the user passes the 
+    authentication check.
+    """
 
     model = BugTracker
     fields = ["bug_title", 'project_name', 'date_occured',
@@ -67,7 +77,8 @@ class BugUpdateView(UpdateView):
 
     def get(self, request, *args, **kwargs):
         """
-        Method verifies if user created the object. If the user did not create the object, they are redirected to an error page.
+        Method verifies if user created the object. If the user did not create
+        the object, they are redirected to an error page.
         """
         # get the user who created the object
         object_user = BugTracker.objects.filter(user=request.user)
@@ -81,7 +92,9 @@ class BugUpdateView(UpdateView):
 
 
 class BugDeleteView(DeleteView):
-    """ View will delete the selected object """
+    """
+    View will delete the selected object if the user passes the authentication check.
+    """
 
     model = BugTracker
     success_url = reverse_lazy('bug_list')
@@ -100,6 +113,9 @@ class BugDeleteView(DeleteView):
 
 
 class BugSearchListView(ListView):
+    """
+    List View that displays the object list provided from the homeView method's search form. 
+    """
 
     model = BugTracker
     template_name = 'search_results.html'
