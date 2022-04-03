@@ -48,6 +48,7 @@ class BugUpdateView(UpdateView):
 
 
 class BugDeleteView(DeleteView):
+    """ View will delete the selected object """
 
     model = BugTracker
     success_url = reverse_lazy('index_list')
