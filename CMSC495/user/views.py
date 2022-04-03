@@ -1,5 +1,6 @@
 from django.http import request
 from django.shortcuts import render
+from django.contrib.auth.forms import UserCreationForm
 from django.contrib.auth.decorators import login_required
 from .forms import UserRegistration, UserEditForm
 
@@ -14,22 +15,15 @@ def profileView(request):
 
 def registerView(request):
     if request.method == 'POST':
-        form = UserRegistration(request.POST or None)
+        form = UserCreationForm(request.POST)
         if form.is_valid():
-            new_user = form.save()
-            new_user.set_password(
-                form.cleaned_data.get('password')
-            )
-            new_user.save()
+            form.save()
+
             return render(request, 'user/profile.html')
     else:
-        form = UserRegistration()
+        form = UserCreationForm()
 
-    context = {
-        "form": form
-    }
-
-    return render(request, 'user/register.html', context=context)
+    return render(request, 'user/register.html', {"form": form})
 
 
 @login_required
