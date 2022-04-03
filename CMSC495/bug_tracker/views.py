@@ -5,9 +5,26 @@ from django.http import HttpResponse
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
+from .forms import SearchForm
 
-def about(request):
+
+def aboutView(request):
     return render(request, 'bug_tracker/about.html')
+
+
+def homeView(request):
+    if request.method == 'GET':
+        form = SearchForm(request.GET)
+        if form.is_valid():
+            query = form.cleaned_data['search']
+
+            object_list = BugTracker.objects.filter(bug_title__icontains=query)
+
+            return render(request, 'bug_tracker/search_results.html', {"object_list": object_list})
+
+        else:
+            form = SearchForm()
+        return render(request, 'bug_tracker/home.html', {"form": form})
 
 
 class IndexListView(ListView):
@@ -22,7 +39,7 @@ class BugCreateView(CreateView):
     model = BugTracker
     form_class = BugTrackerForm
     # on successful submission of form, the view will send the user to the list view index
-    success_url = reverse_lazy('index_list')
+    success_url = reverse_lazy('bug_list')
 
     def form_valid(self, form_class):
         """ Method validates the form and assigns it to the user signed in"""
@@ -52,3 +69,9 @@ class BugDeleteView(DeleteView):
 
     model = BugTracker
     success_url = reverse_lazy('index_list')
+
+
+class BugSearchListView(ListView):
+
+    model = BugTracker
+    template_name = 'search_results.html'
