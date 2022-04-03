@@ -1,4 +1,5 @@
 from django.forms import ModelForm, SelectDateWidget
+from django import forms
 from bug_tracker.models import BugTracker
 
 
@@ -18,3 +19,7 @@ class BugTrackerForm(ModelForm):
         widgets = {
             'date_occured': SelectDateWidget()
         }
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(label='Search', max_length=100)
