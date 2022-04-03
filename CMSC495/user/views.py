@@ -19,7 +19,7 @@ def registerView(request):
         if form.is_valid():
             form.save()
 
-            return render(request, 'user/profile.html')
+            return render(request, 'user/login.html')
     else:
         form = UserCreationForm()
 
@@ -33,6 +33,7 @@ def editView(request):
                                  data=request.POST)
         if user_form.is_valid():
             user_form.save()
+            return render(request, 'user/profile.html')
     else:
         user_form = UserEditForm(instance=request.user)
     context = {
