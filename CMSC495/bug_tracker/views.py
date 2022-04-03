@@ -61,14 +61,14 @@ class BugUpdateView(UpdateView):
     fields = ["bug_title", 'project_name', 'date_occured',
               'bug_description', 'bug_risk']
     template_name_suffix = '_update_form'
-    success_url = reverse_lazy("index_list")
+    success_url = reverse_lazy("bug_list")
 
 
 class BugDeleteView(DeleteView):
     """ View will delete the selected object """
 
     model = BugTracker
-    success_url = reverse_lazy('index_list')
+    success_url = reverse_lazy('bug_list')
 
 
 class BugSearchListView(ListView):
