@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseForbidden
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
@@ -63,12 +63,38 @@ class BugUpdateView(UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy("bug_list")
 
+    def get(self, request, *args, **kwargs):
+        """
+        Method verifies if user created the object. If the user did not create the object, they are redirected to an error page.
+        """
+        # get the user who created the object
+        object_user = BugTracker.objects.filter(user=request.user)
+        # get the user logged in
+        current_user = self.request.user
+
+        if object_user != current_user:
+            return HttpResponseForbidden('Permission Error')
+        else:
+            return render(request, self.template_name)
+
 
 class BugDeleteView(DeleteView):
     """ View will delete the selected object """
 
     model = BugTracker
     success_url = reverse_lazy('bug_list')
+
+    def get(self, request, *args, **kwargs):
+        """
+        Method verifies if user created the object. If the user did not create the object, they are redirected to an error page.
+        """
+        object_user = BugTracker.objects.filter(user=request.user)
+        current_user = self.request.user
+
+        if object_user != current_user:
+            return HttpResponseForbidden('Permission Error')
+        else:
+            return render(request, self.template_name)
 
 
 class BugSearchListView(ListView):
