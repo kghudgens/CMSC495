@@ -9,6 +9,7 @@ from .forms import SearchForm
 
 
 def aboutView(request):
+    """ View that will display the about page """
     return render(request, 'bug_tracker/about.html')
 
 
@@ -16,10 +17,11 @@ def homeView(request):
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
+            # get the users query
             query = form.cleaned_data['search']
-
+            # search for the users query
             object_list = BugTracker.objects.filter(bug_title__icontains=query)
-
+            # send the user to the page with the results
             return render(request, 'bug_tracker/search_results.html', {"object_list": object_list})
 
         else:
