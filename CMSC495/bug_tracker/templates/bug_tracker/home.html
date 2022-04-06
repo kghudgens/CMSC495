@@ -3,23 +3,34 @@
 {%load crispy_forms_tags%} {%block content%}
 
 <!-- Form for searching -->
-<form action="" method="get">
-  {% csrf_token %} {{ form|crispy }}
-  <input name="query" type="submit" value="Confirm" />
-</form>
+<div class="container">
+  <form action="" method="get">
+    <fieldset>
+      <legend>Search</legend>
+      {% csrf_token %} {{ form|crispy }}
+      <br />
+      <input
+        class="btn btn-lg btn-primary"
+        name="query"
+        type="submit"
+        value="Confirm"
+      />
+    </fieldset>
+  </form>
+</div>
 
-<br />
-<!-- if user is authenticated they are given access tothe new bug functionality -->
-{%if user.is_authenticated %}
-<a href="{% url 'create_bug' %}"> <button>Create New Bug</button></a>
-{%else%}
-
-<p><a href="{% url 'login' %}">Log in </a>to create new bugs</p>
-{%endif%}
-<!--  -->
-
-<h1>Welcome to the Bug Tracker</h1>
-
-<h2>The Capstone Project for CMSC 495</h2>
+<main class="px-3 text-center">
+  <h1>Squish your bugs.</h1>
+  <p class="lead">The Bug Tracker serving all of your needs.</p>
+  <p class="lead">
+    {%if user.is_authenticated%}
+    <a href="{% url 'create_bug'%}" class="btn btn-lg btn-primary"
+      >Create Bug</a
+    >
+    {% else %}
+    <a href="{% url 'login'%}" class="btn btn-lg btn-primary">Log In</a>
+    {% endif %}
+  </p>
+</main>
 
 {%endblock content%}
