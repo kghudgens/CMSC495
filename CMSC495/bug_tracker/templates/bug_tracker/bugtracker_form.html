@@ -3,8 +3,18 @@
 {%load crispy_forms_tags %}
 <!--  -->
 {%block content%}
-<form method="post">
-  {%csrf_token%}{{form|crispy}}
-  <input type="submit" value="Submit" />
-</form>
+
+<div class="container w-75">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h1 class="display-4">Create New Bug</h1>
+      <p class="lead">Please enter information about the bug.</p>
+    </div>
+  </div>
+  <form method="post">
+    {%csrf_token%}{{form|crispy}}
+    <br />
+    <input class="btn btn-primary" type="submit" value="Create" />
+  </form>
+</div>
 {%endblock%}
