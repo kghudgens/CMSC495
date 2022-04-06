@@ -3,22 +3,9 @@
 {%load crispy_forms_tags%} {%block content%}
 
 <!-- Form for searching -->
-<div class="container">
-  <form action="" method="get">
-    <fieldset>
-      <legend>Search</legend>
-      {% csrf_token %} {{ form|crispy }}
-      <br />
-      <input
-        class="btn btn-lg btn-primary"
-        name="query"
-        type="submit"
-        value="Confirm"
-      />
-    </fieldset>
-  </form>
-</div>
 
+<br />
+<br />
 <main class="px-3 text-center">
   <h1>Squish your bugs.</h1>
   <p class="lead">The Bug Tracker serving all of your needs.</p>
@@ -30,7 +17,28 @@
     {% else %}
     <a href="{% url 'login'%}" class="btn btn-lg btn-primary">Log In</a>
     {% endif %}
+    <a href="{% url 'bug_list'%}" class="btn btn-lg btn-primary">View Bugs</a>
   </p>
+
+  <br />
+  <div class="container">
+    <form method="get">
+      <fieldset>
+        <legend>Find a Bug</legend>
+        {% csrf_token %}
+        <div class="input-group d-flex justify-content-center">
+          {{ form|crispy }}
+
+          <input
+            class="btn btn-primary"
+            name="query"
+            type="submit"
+            value="Search"
+          />
+        </div>
+      </fieldset>
+    </form>
+  </div>
 </main>
 
 {%endblock content%}
