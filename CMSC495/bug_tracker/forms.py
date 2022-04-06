@@ -24,4 +24,4 @@ class BugTrackerForm(ModelForm):
 
 class SearchForm(forms.Form):
     """ Class that represents the search bar to retrieve the bug tracker objects """
-    search = forms.CharField(label='Search', max_length=100)
+    search = forms.CharField(label='', max_length=100)
