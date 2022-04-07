@@ -78,7 +78,7 @@ class BugUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
     def test_func(self):
         obj = self.get_object()
-        return object.user == self.request.user
+        return obj.user == self.request.user
 
 
 class BugDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
@@ -91,7 +91,7 @@ class BugDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
 
     def test_func(self):
         obj = self.get_object()
-        return object.user == self.request.user
+        return obj.user == self.request.user
 
 
 class BugSearchListView(ListView):
