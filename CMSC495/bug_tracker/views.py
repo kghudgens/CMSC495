@@ -2,7 +2,6 @@ from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
-from django.http import HttpResponseForbidden
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
 
@@ -16,6 +15,7 @@ def aboutView(request):
 
 def homeView(request):
     """ View that displays the home page and the search bar. """
+
     if request.method == 'GET':
         form = SearchForm(request.GET)
         if form.is_valid():
