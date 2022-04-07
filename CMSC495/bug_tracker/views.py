@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
-from django.contrib.auth.mixins import UserPassesTestMixin
+from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from django.http import HttpResponseForbidden
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
@@ -37,7 +37,7 @@ class IndexListView(ListView):
     model = BugTracker
 
 
-class BugCreateView(CreateView):
+class BugCreateView(LoginRequiredMixin, CreateView):
     """
     Create View that will allow logged in users the permission to create new 
     bug objects.
@@ -64,7 +64,7 @@ class BugDetailView(DetailView):
     context_object_name = 'bug'
 
 
-class BugUpdateView(UserPassesTestMixin, UpdateView):
+class BugUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     """
     Update View that will update the selected object if the user passes the 
     authentication check.
@@ -81,7 +81,7 @@ class BugUpdateView(UserPassesTestMixin, UpdateView):
         return object.user == self.request.user
 
 
-class BugDeleteView(UserPassesTestMixin, DeleteView):
+class BugDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     """
     View will delete the selected object if the user passes the authentication check.
     """
