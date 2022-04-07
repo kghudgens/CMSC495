@@ -1,6 +1,16 @@
 {%extends 'bug_tracker/base.html'%}
 <!--  -->
-{%block content%} {%if user.is_authenticated%}
+{%block content%}
+<!-- Welcome text to page -->
+<div class="jumbotron jumbotron-fluid text-center">
+  <div class="container">
+    <h1 class="display-4">Let's Squish</h1>
+    <p class="lead">List of all Bugs our development team is facing</p>
+  </div>
+</div>
+
+{%if user.is_authenticated%}
+<!-- Allow user to create new bug description -->
 <div class="container d-flex justify-content-end">
   <a href="{% url 'create_bug'%}" class="btn btn-primary">Create Bug</a>
 </div>
