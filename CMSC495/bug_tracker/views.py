@@ -1,6 +1,7 @@
 from django.shortcuts import render
 from django.urls import reverse_lazy
 from django.views.generic import ListView, CreateView, DetailView, UpdateView, DeleteView
+from django.contrib.auth.mixins import UserPassesTestMixin
 from django.http import HttpResponseForbidden
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
@@ -63,7 +64,7 @@ class BugDetailView(DetailView):
     context_object_name = 'bug'
 
 
-class BugUpdateView(UpdateView):
+class BugUpdateView(UserPassesTestMixin, UpdateView):
     """
     Update View that will update the selected object if the user passes the 
     authentication check.
@@ -75,23 +76,12 @@ class BugUpdateView(UpdateView):
     template_name_suffix = '_update_form'
     success_url = reverse_lazy("bug_list")
 
-    def get(self, request, *args, **kwargs):
-        """
-        Method verifies if user created the object. If the user did not create
-        the object, they are redirected to an error page.
-        """
-        # get the user who created the object
-        object_user = BugTracker.objects.filter(user=request.user)
-        # get the user logged in
-        current_user = self.request.user
-
-        if object_user != current_user:
-            return HttpResponseForbidden('Permission Error')
-        else:
-            return render(request, self.template_name)
+    def test_func(self):
+        obj = self.get_object()
+        return object.user == self.request.user
 
 
-class BugDeleteView(DeleteView):
+class BugDeleteView(UserPassesTestMixin, DeleteView):
     """
     View will delete the selected object if the user passes the authentication check.
     """
@@ -99,17 +89,9 @@ class BugDeleteView(DeleteView):
     model = BugTracker
     success_url = reverse_lazy('bug_list')
 
-    def get(self, request, *args, **kwargs):
-        """
-        Method verifies if user created the object. If the user did not create the object, they are redirected to an error page.
-        """
-        object_user = BugTracker.objects.filter(user=request.user)
-        current_user = self.request.user
-
-        if object_user != current_user:
-            return HttpResponseForbidden('Permission Error')
-        else:
-            return render(request, self.template_name)
+    def test_func(self):
+        obj = self.get_object()
+        return object.user == self.request.user
 
 
 class BugSearchListView(ListView):
