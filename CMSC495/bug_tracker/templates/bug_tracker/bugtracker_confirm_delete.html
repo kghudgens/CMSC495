@@ -1,10 +1,13 @@
 {%extends 'bug_tracker/base.html'%} {% load crispy_forms_tags%}
 <!--  -->
 {%block content%}
-<form method="post">
-  {% csrf_token %}
-  <p>Are you sure you want to delete "{{ object }}"?</p>
-  {{ form|crispy }}
-  <input type="submit" value="Confirm" />
-</form>
+<div class="container">
+  <form method="post">
+    {% csrf_token %}
+    <h4>Are you sure you want to delete "{{ object }}"?</h4>
+    {{ form|crispy }}
+    <input class="btn btn-primary" type="submit" value="Confirm" />
+  </form>
+</div>
+
 {%endblock%}
