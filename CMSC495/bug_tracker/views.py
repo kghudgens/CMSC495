@@ -8,12 +8,12 @@ from bug_tracker.models import BugTracker
 from .forms import SearchForm
 
 
-def aboutView(request):
+def about_view(request):
     """ View that will display the about page. """
     return render(request, 'bug_tracker/about.html')
 
 
-def homeView(request):
+def home_view(request):
     """ View that displays the home page and the search bar. """
 
     if request.method == 'GET':
