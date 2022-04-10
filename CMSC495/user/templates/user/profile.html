@@ -3,6 +3,12 @@
 
 {%block content%}
 <h1>Profile</h1>
-{{user.username}} {{user.first_name}} {{user.last_name}}
-<a href="{% url 'edit' %}"> <button>Edit Profile</button></a>
+{{"Username: "}} {{user.username}}
+<br>
+{{"User: "}} {{user.first_name}} {{user.last_name}}
+<br>
+{{"Email address: "}} {{user.Email}}
+<br>
+<a href="{% url 'edit' %}">
+<button>Edit Profile</button></a>
 {%endblock%}
