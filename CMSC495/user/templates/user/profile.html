@@ -2,7 +2,16 @@
 <!--  -->
 
 {%block content%}
-<h1>Profile</h1>
-{{user.username}} {{user.first_name}} {{user.last_name}}
-<a href="{% url 'edit' %}"> <button>Edit Profile</button></a>
+<div class="container">
+  <h1>Profile</h1>
+  {{"Username: "}} {{user.username}}
+  <br />
+  {{"User: "}} {{user.first_name}} {{user.last_name}}
+  <br />
+  {{"Email address: "}} {{user.email}}
+  <br />
+  <a href="{% url 'edit'%}" class="btn btn btn-primary">Edit Profile</a>
+  <!-- <a href="{% url 'edit' %}"> <button>Edit Profile</button></a> -->
+</div>
+
 {%endblock%}
