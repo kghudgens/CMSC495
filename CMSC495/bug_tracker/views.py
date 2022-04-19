@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
+from django.db.models import Q
 
 from .forms import SearchForm
 
@@ -22,7 +23,7 @@ def home_view(request):
             # get the users query
             query = form.cleaned_data['search']
             # search for the users query
-            object_list = BugTracker.objects.filter(bug_title__icontains=query)
+            object_list = BugTracker.objects.filter(Q(bug_title__icontains=query) | Q(project_name__icontains=query) | Q(bug_description__icontains=query))
             # send the user to the page with the results
             return render(request, 'bug_tracker/search_results.html', {"object_list": object_list})
 
