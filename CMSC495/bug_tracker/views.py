@@ -4,6 +4,7 @@ from django.views.generic import ListView, CreateView, DetailView, UpdateView, D
 from django.contrib.auth.mixins import UserPassesTestMixin, LoginRequiredMixin
 from bug_tracker.forms import BugTrackerForm
 from bug_tracker.models import BugTracker
+""" Q module is used to allow more complex filtering when searching for tickets """
 from django.db.models import Q
 
 from .forms import SearchForm
