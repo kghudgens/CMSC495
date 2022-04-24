@@ -4,14 +4,15 @@
 {%block content%}
 <div class="container">
   <h1>Profile</h1>
-  {{"Username: "}} {{user.username}}
+  <!-- Bracket notation in django is for variables -->
+  <!-- 'user' is the context and with dot notation we query its fields -->
+  Username: {{user.username}}
   <br />
-  {{"User: "}} {{user.first_name}} {{user.last_name}}
+  User: {{user.first_name}} {{user.last_name}}
   <br />
-  {{"Email address: "}} {{user.email}}
+  Email address: {{user.email}}
   <br />
   <a href="{% url 'edit'%}" class="btn btn btn-primary">Edit Profile</a>
-  <!-- <a href="{% url 'edit' %}"> <button>Edit Profile</button></a> -->
 </div>
 
 {%endblock%}
