@@ -7,38 +7,64 @@
 <br />
 <br />
 <main class="px-3 text-center">
-  <h1>Squish your bugs.</h1>
-  <p class="lead">The Bug Tracker serving all of your needs.</p>
-  <p class="lead">
-    {%if user.is_authenticated%}
-    <a href="{% url 'create_bug'%}" class="btn btn-lg btn-primary"
-      >Create Bug</a
-    >
-    {% else %}
-    <a href="{% url 'login'%}" class="btn btn-lg btn-primary">Log In</a>
-    {% endif %}
-    <a href="{% url 'bug_list'%}" class="btn btn-lg btn-primary">View Bugs</a>
-  </p>
+  <p>
 
-  <br />
+
+
+
+
   <div class="container">
-    <form method="get">
-      <fieldset>
-        <legend>Find a Bug</legend>
-        {% csrf_token %}
-        <div class="input-group d-flex justify-content-center">
-          {{ form|crispy }}
+    <div class="jumbotron">
+        <h1 class="display-4"><b>SQUISH</b> Your Bugs!  <i class="fa fa-bug" aria-hidden="true"></i></h1>
+        <p class="lead">The Bug Tracker Serving <b>ALL</b> of Your Needs!</p>
 
-          <input
-            class="btn btn-primary"
-            name="query"
-            type="submit"
-            value="Search"
-          />
+
+        <hr class="my-4">
+        <form method="get">
+          <fieldset>
+            <legend><i class="fa fa-search" aria-hidden="true"></i> Find A Bug</legend>
+            {% csrf_token %}
+            <div class="input-group d-flex justify-content-center">
+              {{ form|crispy }}
+    
+              <input
+                class="btn btn-primary"
+                name="query"
+                type="submit"
+                value="Search"
+              />
+            </div>
+          </fieldset>
+        </form>
+        <p>Loooking for a specific bug?</p>
+        
+    </div>
+    
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-plus" aria-hidden="true"></i> Add a Bug</h5>
+                    <p class="card-text">Log, then monitor bugs and errors.</p>
+                  
+                    <a href="{% url 'create_bug'%}" class="btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Create New Bugs</a>
+                </div>
+            </div>
         </div>
-      </fieldset>
-    </form>
-  </div>
-</main>
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title"><i class="fa fa-angle-double-right" aria-hidden="true"></i> View ALL Bugs</h5>
+                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                    <a href="{% url 'bug_list'%" class="btn btn-primary"><i class="fa fa-angle-double-right" aria-hidden="true"></i> View Bugs</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+  <p>
 
 {%endblock content%}
