@@ -1,0 +1,31 @@
+{%extends 'bug_tracker/base.html'%} {% load crispy_forms_tags%}
+<!--  -->
+{%block content%}
+
+<h1><b><i class="fa fa-bug" aria-hidden="true"></i>
+ | SQUISH | </b> Search Results</h1>
+<ul>
+  {% for bug in object_list %}
+  <hr width=40%  align=left>
+  <h1>{{bug.bug_title}}</h1> || {{bug.date}}
+  <p>
+  <li><i class="fa fa-exclamation-triangle" aria-hidden="true"></i> Risk Level: <br> 
+    <b>{{bug.bug_risk}}</b></li>
+  <hr width=10%  align=left>
+  <li><i class="fa fa-folder" aria-hidden="true"></i> Project Name: <br>
+    <b>{{bug.project_name}}</b></li>
+  <hr width=10%  align=left>
+  <li><i class="fa fa-user" aria-hidden="true"></i> Username:<br> 
+    <b>{{bug.user}}</b>
+  </li><hr width=10%  align=left>
+  <li><i class="fa fa-calendar" aria-hidden="true"></i> Date Bug Occured:</br> 
+    <b>{{bug.date_occured}}</b></li>
+  <hr width=10%  align=left>
+  <li><b>Bug Description:</b> <br>
+    {{bug.bug_description|truncatewords:"50"}}</li>
+  <a href="{%url 'bug_detail' bug.pk%}"><button><i class="fa fa-bug" aria-hidden="true"></i> View Bug</button></a>
+  <hr width=40%  align=left>
+
+  {% endfor %}
+</ul>
+{%endblock%}

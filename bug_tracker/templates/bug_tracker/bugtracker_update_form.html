@@ -1,0 +1,17 @@
+{%extends "bug_tracker/base.html"%}
+<!--  -->
+{%load crispy_forms_tags %} {%block content%}
+<div class="container">
+  <div class="text-center">
+    <h1><b><i class="fa fa-bug" aria-hidden="true"></i>
+      | SQUISH | </b> Edit Bug Description</h1>
+  </div>
+  <div class="">
+    <form method="post">
+      {%csrf_token%}{{form|crispy}}
+      <input class="btn btn-primary" type="submit" value="Update" />
+    </form>
+  </div>
+</div>
+
+{%endblock%}

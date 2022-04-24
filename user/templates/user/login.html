@@ -1,0 +1,10 @@
+{%extends 'bug_tracker/base.html'%} {% load crispy_forms_tags%}
+<!--  -->
+{%block content%}
+<h1><b><i class="fa fa-bug" aria-hidden="true"></i>
+  | SQUISH | </b></h1>
+<form method="post">
+  {% csrf_token %} {{ form|crispy }}
+  <input type="submit" value="Confirm" />
+</form>
+{%endblock%}

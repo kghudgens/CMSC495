@@ -1,0 +1,22 @@
+{%extends "bug_tracker/base.html"%}
+<!--  -->
+{%load crispy_forms_tags %}
+<!--  -->
+{%block content%}
+
+<div class="container w-75">
+  <div class="jumbotron jumbotron-fluid">
+    <div class="container text-center">
+      <h1 class="display-4"><i class="fa fa-plus" aria-hidden="true"></i>Create New Bug</h1>
+      <h1><b><i class="fa fa-bug" aria-hidden="true"></i>
+        | SQUISH | </b> Add New Bug</h1>
+      <p class="lead">Please enter information about the bug.</p>
+    </div>
+  </div>
+  <form method="post">
+    {%csrf_token%}{{form|crispy}}
+    <br />
+    <input class="btn btn-primary" type="submit" value="Create" />
+  </form>
+</div>
+{%endblock%}

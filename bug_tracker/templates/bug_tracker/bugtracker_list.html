@@ -1,0 +1,40 @@
+{%extends 'bug_tracker/base.html'%}
+<!--  -->
+{%block content%}
+<!-- Welcome text to page -->
+<div class="container">
+    <h1><b><i class="fa fa-bug" aria-hidden="true"></i>
+      | SQUISH | </b> Ready to <b>SQUISH</b>?</h1>
+    <p class="lead">COMPLETE LIST OF ACTIVE BUGS</p>
+  </div>
+</div>
+
+{%if user.is_authenticated%}
+<!-- Allow user to create new bug description -->
+<div class="container d-flex justify-content-end">
+  <a href="{% url 'create_bug'%}" class="btn btn-primary">Create Bug</a>
+</div>
+<br />
+{%endif%}
+<!-- Bug Loop -->
+
+{% for bug in object_list %}
+
+<div class="container card">
+  <div class="card-header">{{bug.project_name}}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{bug.bug_title}}</h5>
+    <p class="card-text muted">{{bug.date}}</p>
+    <p class="card-text">{{bug.user}}</p>
+    <p class="card-text">{{bug.date_occured}}</p>
+    <p class="card-texts">{{bug.bug_description|truncatewords:"50"}}</p>
+    <a href="{%url 'bug_detail' bug.pk%}" class="btn btn-primary">View Bug</a>
+  </div>
+</div>
+
+<br />
+{% empty%}
+<div class="jumbotron jumbotron-fluid text-center">
+<p>No bugs to view</p>
+</div><p>
+{%endfor%} {%endblock content%}
