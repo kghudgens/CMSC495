@@ -1,8 +1,12 @@
 {%extends 'bug_tracker/base.html'%} {% load crispy_forms_tags%}
 <!--  -->
 {%block content%}
-<form method="post">
-  {% csrf_token %} {{ form|crispy }}
-  <input type="submit" value="Confirm" />
-</form>
+<div class="container">
+  <form method="post">
+    {% csrf_token %} {{ form|crispy }}
+    <br />
+    <input type="submit" value="Confirm" class="btn btn-primary" />
+  </form>
+</div>
+
 {%endblock%}
