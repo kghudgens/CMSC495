@@ -2,19 +2,27 @@
 <!--  -->
 {%block content%}
 
-<h1>Search Results</h1>
-<ul>
-  {% for bug in object_list %}
-  <h1>{{bug.bug_title}}</h1>
-  <li>{{bug.date}}</li>
+<div class="jumbotron jumbotron-fluid text-center">
+  <div class="container">
+    <h1 class="display-4">Search Results</h1>
+  </div>
+</div>
+{% for bug in object_list %}
 
-  <li>Bug Risk : {{bug.bug_risk}}</li>
-  <li>Project Name : {{bug.project_name}}</li>
-  <li>Username : {{bug.user}}</li>
-  <li>Date Bug Occured : {{bug.date_occured}}</li>
-  <li>Bug Description : {{bug.bug_description|truncatewords:"50"}}</li>
-  <a href="{%url 'bug_detail' bug.pk%}"><button>View Bug</button></a>
-
-  {% endfor %}
-</ul>
-{%endblock%}
+<div class="container card">
+  <!-- Bootstrap class container -->
+  <div class="card-header">{{bug.project_name}}</div>
+  <div class="card-body">
+    <h5 class="card-title">{{bug.bug_title}}</h5>
+    <p class="card-text muted">{{bug.date}}</p>
+    <p class="card-text">{{bug.user}}</p>
+    <p class="card-text">{{bug.date_occured}}</p>
+    <p class="card-texts">{{bug.bug_description|truncatewords:"50"}}</p>
+    <a href="{%url 'bug_detail' bug.pk%}" class="btn btn-primary">View Bug</a>
+  </div>
+</div>
+<br />
+{% empty%}
+<!-- If no bug exist to display -->
+<p>No bugs to view</p>
+{%endfor%} {%endblock%}
